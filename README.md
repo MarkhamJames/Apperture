@@ -89,3 +89,14 @@ expressed as boolean values which will be compared to the input of a dropdown me
 	*  create and update for CreateReview
 	*  delete for both locale and review
 	
+	## Timeframes
+	
+	Component        | Priority      | Estimated Time     | Time Invested               | Actual Time
+--------------------|------------------|-----------------------|---------------------------------------|-------|Intra-word emphasis | So A\*maz\*ing   | So A<em>maz</em>ing   |
+Auth      | High  | 2 hours   |
+Backend Routes | High     | 2-3 hours       |
+    Frontend Routes  | High  | 4-5 hours    |
+Frontend Components          | High  | 4-5 hours |
+Styling         | High     | 6 hours   |
+     Post - MVP   | Low    | ???      |
+        
