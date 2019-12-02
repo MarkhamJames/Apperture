@@ -6,6 +6,27 @@
 
 App(erture) is a city directory for the intrepid photographer.  The user can view a detailed listing of recommended locales in New York city for capturing epic photographs according to the users search criteria.  Recommended locales are categorized according to shared attributes that may be of interest to the photograper such as skyline, historical, landscape, ect.  Selected landmarks are accompanied by a detailed description as to what makes the selection a joy to photograph.
 
+## MVP
+
+* Login/Auth
+* 3 tables (one to many association) (User table)
+* Full CRUD
+	* index and show pages for locales
+	* Create routes for locales and reviews
+	* Edit routes for locales and reviews
+	* Delete routesfor locales and reviews
+
+## Post MVP
+
+* Integration of 3rd party API 
+
+## Feature List
+
+* Login/Auth
+* Carousel
+* search/dropdown menu
+* Review Section
+
 ## Entity Relationship Diagram
 
 ![ERD](https://i.imgur.com/0OombKB.jpg)
