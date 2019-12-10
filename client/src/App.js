@@ -16,6 +16,7 @@ class App extends Component {
   state = {
     currentUser: '',
     locales: [],
+    reviews: [],
     authErrorMessage: ''
   }
 

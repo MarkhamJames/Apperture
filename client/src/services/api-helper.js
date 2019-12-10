@@ -1,7 +1,10 @@
 import axios from 'axios'
 
+// const baseUrl = "https://apperture-api2.herokuapp.com/"
+const baseUrl = "http://localhost:3000"
+
 const api = axios.create({
-  baseURL: 'http://localhost:3000'
+  baseURL: baseUrl
 })
 
 
@@ -72,12 +75,12 @@ export const deleteLocale = async (userId, localeId) => {
   return resp.data
 }
 export const getReviews = async (localeId) => {
-  const resp = await api.get(`/locale/${localeId}/reviews`)
+  const resp = await api.get(`/locales/${localeId}/reviews`)
   return resp.data
 }
 
 export const postReview = async (localeId, reviewData) => {
-  const resp = await api.post(`/locales/${localeId}/reviews`, reviewData)
+  const resp = await api.post(`/locales/${localeId}/reviews`, { review: reviewData })
   console.log(localeId)
   return resp.data
 }
@@ -88,7 +91,7 @@ export const putReview = async (reviewId, reviewData) => {
 }
 
 export const deleteReview = async (localeId, reviewId) => {
-  const resp = await api.delete(`/locale/${localeId}/reviews/${reviewId}`)
+  const resp = await api.delete(`/locales/${localeId}/reviews/${reviewId}`)
   return resp.data
 }
 

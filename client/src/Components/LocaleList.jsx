@@ -18,7 +18,7 @@ export default function LocaleList(props) {
         <div id='title-box'>
         </div>
         <div id='mission-box'>
-          <p id='mission'>"New York, through the looking glass"</p>
+          <p id='mission'>New York, through the looking glass</p>
         </div>
       </div>
       <div id='top-box'>

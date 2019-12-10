@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export default function Header(props) {
   return (
     <nav>
-      <Link to='/' id='home'>(App)erture of New York</Link>
+      <Link to='/' id='home'>(App)erture</Link>
       {
         props.currentUser ?
           <div id='header'>
@@ -12,12 +12,12 @@ export default function Header(props) {
               <p>{props.currentUser.username}</p>
             </Link>
             <Link to='/locale/new' id='add'>
-              <a>Add Locale</a>
+              <div>Add Locale</div>
             </Link>
             <a onClick={props.handleLogout} id='logout'>Logout</a>
           </div>
           :
-          <Link to='/login' id='login-nav'><a>Login/Register</a></Link>
+          <Link to='/login' id='login-nav'><div>Login/Register</div></Link>
       }
     </nav >
   )

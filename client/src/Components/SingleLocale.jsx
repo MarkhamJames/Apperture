@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import CreateReview from './CreateReview'
-import { postReview, getReviews, getOneLocale, getOneUser, deleteReview } from '../services/api-helper'
+import { postReview, getReviews, getOneLocale, getOneUser, deleteReview, putReview } from '../services/api-helper'
 import ReviewList from './ReviewList'
+import EditReview from './EditReview'
 import axios from 'axios';
 
 
@@ -24,7 +25,7 @@ export default class SingleLocale extends Component {
 
   async componentDidMount() {
     await this.setCurrentLocale()
-    await this.setUser(this.state.currentLocale.userId)
+    // await this.setUser(currentLocale.user_id)
     const reviews = await getReviews(this.props.localeId)
     this.setState({
       reviews
@@ -43,7 +44,13 @@ export default class SingleLocale extends Component {
     this.setState({
       currentLocale
     })
+  }
 
+  updateReview = async (reviewId, reviewData) => {
+    const updatedReview = await putReview(reviewId, reviewData)
+    this.setState(prevState => ({
+      reviews: prevState.reviews.map(review => review.id === parseInt(reviewId) ? updatedReview : review)
+    }))
   }
 
   createReview = async (userId, localeId, reviewData) => {
@@ -53,12 +60,14 @@ export default class SingleLocale extends Component {
     }))
   }
 
-  setUser = async (userId) => {
-    const user = await getOneUser(userId)
-    this.setState({
-      user
-    })
-  }
+  // setUser = async (userId) => {
+  //   const user = await getOneUser(userId)
+  //   this.setState({
+  //     user
+  //   })
+  // }
+
+
 
 
   render() {
@@ -66,7 +75,7 @@ export default class SingleLocale extends Component {
     const { currentLocale } = this.state
     const { currentUser } = this.props;
     const reviews = this.state.reviews.filter(review => (
-      review.localeId == currentLocale.id
+      review.locale_id === currentLocale.id
     ))
     return (
       <div id='locale-info'>
@@ -89,11 +98,16 @@ export default class SingleLocale extends Component {
                 currentUser={currentUser}
                 destroyReview={this.destroyReview}
               />
+              <EditReview
+                reviews={this.state.reviews}
+                updateReview={this.updateReview}
+                localeId={currentLocale.id}
+              />
             </div>
             {
               currentUser.id === currentLocale.userId && (
                 <div id='buttons'>
-                  <Link to={`/locale/${currentLocale.id}/edit`}><h5 id='edit-locale'>Edit Game</h5></Link>
+                  <Link to={`/locale/${currentLocale.id}/edit`}><h5 id='edit-locale'>Edit Locale</h5></Link>
                   <h5 id='delete-locale' onClick={() => {
                     this.props.destroyLocale(currentUser.id, currentLocale.id)
                   }}>

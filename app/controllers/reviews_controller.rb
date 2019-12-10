@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
   def index
     @reviews = Review.where(locale_id: params[:locale_id])
 
-    render json: @reviews
+    render json: @reviews, include: :user
   end
 
   # GET /reviews/1
@@ -17,9 +17,10 @@ class ReviewsController < ApplicationController
   # POST /reviews
   def create
     @review = Review.new(review_params)
-
+    @locale = Locale.find(params[:locale_id])
+    @review.locale = @locale
     if @current_user.reviews << @review
-      render json: @review, status: :created, location: @review
+      render json: @review, status: :created
     else
       render json: @review.errors, status: :unprocessable_entity
     end
@@ -28,7 +29,7 @@ class ReviewsController < ApplicationController
   # PATCH/PUT /reviews/1
   def update
     if @review.user == @current_user
-      if @review.update(locale_params)
+      if @review.update(review_params)
         render json: @review
       else
         render json: @review.errors, status: :unprocessable_entity
